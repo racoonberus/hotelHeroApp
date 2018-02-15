@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wicket="http://wicket.apache.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Start Bootstrap Template</title>
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark">
+<div class="container">
+    <div class="card card-register mx-auto mt-5">
+        <div class="card-header">Register an Account</div>
+        <div class="card-body">
+            <form wicket:id="form">
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label for="firstName">First name</label>
+                            <input wicket:id="firstName"
+                                   id="firstName" class="form-control" type="text" placeholder="Enter first name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="lastName">Last name</label>
+                            <input wicket:id="lastName"
+                                   id="lastName" class="form-control" type="text" placeholder="Enter last name">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input wicket:id="email"
+                           class="form-control" id="email" type="email" aria-describedby="emailHelp"
+                           placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label for="password1">Password</label>
+                            <input wicket:id="password1"
+                                   class="form-control" id="password1" type="password"
+                                   placeholder="Password">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="password2">Confirm password</label>
+                            <input wicket:id="password2"
+                                   class="form-control" id="password2" type="password"
+                                   placeholder="Confirm password">
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Register" class="btn btn-primary btn-block"/>
+            </form>
+            <div class="text-center">
+                <wicket:link>
+                    <a class="d-block small mt-3" href="SignInPage.html">Login Page</a>
+                    <a class="d-block small" href="ForgotPasswordPage.html">Forgot Password?</a>
+                </wicket:link>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+<wicket:panel xmlns:wicket="http://wicket.apache.org">
+    <wicket:link>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="ProfilePage.html" class="nav-link">
+                    <i class="fa fa-fw fa-user-o"></i><span wicket:id="username"></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <!--<a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa fa-fw fa-sign-out"></i>Logout
+                </a>-->
+                <a wicket:id="logout" class="nav-link">
+                    <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+            </li>
+        </ul>
+    </wicket:link>
+</wicket:panel>

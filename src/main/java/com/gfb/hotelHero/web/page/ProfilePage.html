@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wicket="http://wicket.apache.org">
+<head></head>
+<body>
+<wicket:extend>
+
+    <form wicket:id="form">
+        <div class="row">
+            <div class="col-6">
+
+                <div class="form-group">
+                    <input wicket:id="lastName" class="form-control" placeholder="Last name">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="firstName" class="form-control" placeholder="First name">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="middleName" class="form-control" placeholder="Middle name">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="email" type="email" class="form-control" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="mobilePhone" class="form-control" placeholder="Mobile phone">
+                </div>
+
+                <input type="submit" value="Save" class="btn btn-primary btn-block"/>
+            </div>
+        </div>
+    </form>
+
+</wicket:extend>
+</body>
+</html>
