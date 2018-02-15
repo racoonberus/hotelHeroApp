@@ -1,7 +1,7 @@
-package com.gfb.hotelHero.service;
+package com.racoonberus.hotelHero.service;
 
-import com.gfb.hotelHero.dao.UserDao;
-import com.gfb.hotelHero.domain.User;
+import com.racoonberus.hotelHero.dao.UserDao;
+import com.racoonberus.hotelHero.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

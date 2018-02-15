@@ -1,8 +1,8 @@
-package com.gfb.hotelHero.web.page;
+package com.racoonberus.hotelHero.web.page;
 
-import com.gfb.hotelHero.domain.User;
-import com.gfb.hotelHero.service.UserService;
-import com.gfb.hotelHero.web.security.SimpleAuthenticationSession;
+import com.racoonberus.hotelHero.domain.User;
+import com.racoonberus.hotelHero.service.UserService;
+import com.racoonberus.hotelHero.web.security.SimpleAuthenticationSession;
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.EmailTextField;

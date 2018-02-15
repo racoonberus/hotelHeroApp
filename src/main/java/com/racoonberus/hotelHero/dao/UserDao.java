@@ -1,6 +1,6 @@
-package com.gfb.hotelHero.dao;
+package com.racoonberus.hotelHero.dao;
 
-import com.gfb.hotelHero.domain.User;
+import com.racoonberus.hotelHero.domain.User;
 
 public interface UserDao {
 

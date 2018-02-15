@@ -1,4 +1,4 @@
-package com.gfb.hotelHero.web.panel;
+package com.racoonberus.hotelHero.web.panel;
 
 import org.apache.wicket.markup.html.panel.Panel;
 

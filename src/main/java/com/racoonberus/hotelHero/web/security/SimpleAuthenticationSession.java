@@ -1,7 +1,7 @@
-package com.gfb.hotelHero.web.security;
+package com.racoonberus.hotelHero.web.security;
 
-import com.gfb.hotelHero.domain.User;
-import com.gfb.hotelHero.service.UserService;
+import com.racoonberus.hotelHero.domain.User;
+import com.racoonberus.hotelHero.service.UserService;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.injection.Injector;

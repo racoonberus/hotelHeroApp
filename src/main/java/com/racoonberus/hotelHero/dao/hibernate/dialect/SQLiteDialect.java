@@ -1,4 +1,4 @@
-package com.gfb.hotelHero.dao.hibernate.dialect;
+package com.racoonberus.hotelHero.dao.hibernate.dialect;
 
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.SQLFunctionTemplate;

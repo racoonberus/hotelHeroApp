@@ -1,4 +1,4 @@
-package com.gfb.hotelHero.dao.hibernate;
+package com.racoonberus.hotelHero.dao.hibernate;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;

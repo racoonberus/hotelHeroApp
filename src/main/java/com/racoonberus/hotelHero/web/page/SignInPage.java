@@ -1,4 +1,4 @@
-package com.gfb.hotelHero.web.page;
+package com.racoonberus.hotelHero.web.page;
 
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.markup.html.WebPage;

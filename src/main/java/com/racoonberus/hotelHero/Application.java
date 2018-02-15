@@ -1,7 +1,7 @@
-package com.gfb.hotelHero;
+package com.racoonberus.hotelHero;
 
-import com.gfb.hotelHero.web.page.*;
-import com.gfb.hotelHero.web.security.SimpleAuthenticationSession;
+import com.racoonberus.hotelHero.web.page.*;
+import com.racoonberus.hotelHero.web.security.SimpleAuthenticationSession;
 import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;

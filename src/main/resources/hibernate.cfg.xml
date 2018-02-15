@@ -6,7 +6,7 @@
     <session-factory>
         <property name="connection.driver_class">org.sqlite.JDBC</property>
         <property name="connection.url">jdbc:sqlite:storage.db</property>
-        <property name="dialect">com.gfb.hotelHero.dao.hibernate.dialect.SQLiteDialect</property>
+        <property name="dialect">com.racoonberus.hotelHero.dao.hibernate.dialect.SQLiteDialect</property>
         <property name="connection.username"/>
         <property name="connection.password"/>
 
@@ -18,7 +18,7 @@
 
         <property name="hibernate.enable_lazy_load_no_trans">true</property>
 
-        <mapping class="com.gfb.hotelHero.domain.Contact"/>
-        <mapping class="com.gfb.hotelHero.domain.User"/>
+        <mapping class="com.racoonberus.hotelHero.domain.Contact"/>
+        <mapping class="com.racoonberus.hotelHero.domain.User"/>
     </session-factory>
 </hibernate-configuration>

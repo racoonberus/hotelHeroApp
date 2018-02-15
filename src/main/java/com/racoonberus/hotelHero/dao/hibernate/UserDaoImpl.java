@@ -1,7 +1,7 @@
-package com.gfb.hotelHero.dao.hibernate;
+package com.racoonberus.hotelHero.dao.hibernate;
 
-import com.gfb.hotelHero.dao.UserDao;
-import com.gfb.hotelHero.domain.User;
+import com.racoonberus.hotelHero.dao.UserDao;
+import com.racoonberus.hotelHero.domain.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

@@ -1,9 +1,9 @@
-package com.gfb.hotelHero.web.page;
+package com.racoonberus.hotelHero.web.page;
 
-import com.gfb.hotelHero.domain.User;
-import com.gfb.hotelHero.web.panel.AnonActionsPanel;
-import com.gfb.hotelHero.web.panel.UserActionsPanel;
-import com.gfb.hotelHero.web.security.SimpleAuthenticationSession;
+import com.racoonberus.hotelHero.domain.User;
+import com.racoonberus.hotelHero.web.panel.AnonActionsPanel;
+import com.racoonberus.hotelHero.web.panel.UserActionsPanel;
+import com.racoonberus.hotelHero.web.security.SimpleAuthenticationSession;
 import org.apache.wicket.markup.html.WebPage;
 
 public abstract class BasePage extends WebPage {

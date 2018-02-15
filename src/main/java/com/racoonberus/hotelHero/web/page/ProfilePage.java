@@ -1,7 +1,7 @@
-package com.gfb.hotelHero.web.page;
+package com.racoonberus.hotelHero.web.page;
 
-import com.gfb.hotelHero.domain.User;
-import com.gfb.hotelHero.service.UserService;
+import com.racoonberus.hotelHero.domain.User;
+import com.racoonberus.hotelHero.service.UserService;
 import org.apache.wicket.markup.html.form.EmailTextField;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;

@@ -1,4 +1,4 @@
-package com.gfb.hotelHero.domain;
+package com.racoonberus.hotelHero.domain;
 
 import org.hibernate.annotations.Cascade;
 
