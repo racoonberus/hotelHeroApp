@@ -20,7 +20,7 @@
     <repositories>
         <repository>
             <id>hotel-hero-mvn-repo</id>
-            <url>https://raw.github.com/racoonberus/hotel-hero/repository/</url>
+            <url>https://raw.github.com/racoonberus/tpl-reg-helper/repository/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -120,6 +120,13 @@
             <artifactId>wicket-spring</artifactId>
             <version>7.9.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-extensions</artifactId>
+            <version>7.9.0</version>
+        </dependency>
+
+
 
         <!-- Data storage -->
         <dependency>
@@ -155,8 +162,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.racoonberus.hotelHero</groupId>
-            <artifactId>hotelHeroOld</artifactId>
+            <groupId>com.racoonberus.tplRegHelper</groupId>
+            <artifactId>tplRegHelper</artifactId>
             <version>1.0</version>
         </dependency>
 

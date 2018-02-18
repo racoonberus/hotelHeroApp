@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wicket="http://wicket.apache.org">
+<head>
+    <wicket:head>
+        <style>
+            div.wicket-aa {
+                font-family: "Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana;
+                font-size: 12px;
+                background-color: white;
+                border-width: 1px;
+                border-color: #cccccc;
+                border-style: solid;
+                padding: 2px;
+                margin: 1px 0 0 0;
+                text-align:left;
+            }
+            div.wicket-aa ul { list-style:none; padding: 2px; margin:0; }
+            div.wicket-aa ul li.selected { background-color: #FFFF00; padding: 2px; margin:0; }
+        </style>
+    </wicket:head>
+</head>
+<body>
+<wicket:extend>
+
+    <form wicket:id="form">
+        <div class="row">
+            <div class="col-6">
+
+                <div class="form-group">
+                    <input wicket:id="lastName" class="form-control" placeholder="Last name">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="firstName" class="form-control" placeholder="First name">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="nationality" class="form-control" placeholder="Nationality">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="birthday" class="form-control" placeholder="Birthday">
+                </div>
+                <div class="form-group">
+                    <span wicket:id="gender"></span>
+                </div>
+
+                <h2>Place of birth</h2>
+                <div class="form-group">
+                    <input wicket:id="placeOfBirth.county" class="form-control" placeholder="Country">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="placeOfBirth.city" class="form-control" placeholder="City">
+                </div>
+
+                <h3>Identity document</h3>
+                <div class="form-group">
+                    <span wicket:id="identityDocument.type"></span>
+                </div>
+                <div class="form-group">
+                    <input wicket:id="identityDocument.series" class="form-control" placeholder="Series">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="identityDocument.identifier" class="form-control" placeholder="Number">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="identityDocument.dateOfIssueDate" class="form-control" placeholder="Number">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="identityDocument.validityTillDate" class="form-control" placeholder="Number">
+                </div>
+
+                <h3>Stay confirming document</h3>
+                <div class="form-group">
+                    <span wicket:id="stayConfirmingDocument.type"></span>
+                </div>
+                <div class="form-group">
+                    <input wicket:id="stayConfirmingDocument.series" class="form-control"
+                           placeholder="Series">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="stayConfirmingDocument.identifier" class="form-control"
+                           placeholder="Number">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="stayConfirmingDocument.dateOfIssueDate" class="form-control"
+                           placeholder="From">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="stayConfirmingDocument.validityTillDate" class="form-control"
+                           placeholder="To">
+                </div>
+
+                <div class="form-group">
+                    <span wicket:id="purpose"></span>
+                </div>
+                <div class="form-group">
+                    <input wicket:id="arrivalDate" class="form-control" placeholder="From">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="durationOfStay" class="form-control" placeholder="To">
+                </div>
+
+                <h3>Migration card</h3>
+                <div class="form-group">
+                    <input wicket:id="migrationCard.series" class="form-control" placeholder="Series">
+                </div>
+                <div class="form-group">
+                    <input wicket:id="migrationCard.number" class="form-control" placeholder="Number">
+                </div>
+
+                <input type="submit" value="Save" class="btn btn-primary btn-block"/>
+            </div>
+        </div>
+    </form>
+
+</wicket:extend>
+</body>
+</html>

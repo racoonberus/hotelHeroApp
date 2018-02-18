@@ -2,6 +2,5 @@
 
 cd ./src/main/webapp/
 npm install
-./node_modules/.bin/gulp
-gulp default
+./node_modules/.bin/gulp default
 cd -

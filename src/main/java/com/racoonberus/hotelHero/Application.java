@@ -31,6 +31,7 @@ public class Application extends AuthenticatedWebApplication {
         mountPage("sign-up", SignUpPage.class);
         mountPage("profile", ProfilePage.class);
         mountPage("forgot-password", ForgotPasswordPage.class);
+        mountPage("reg-tpl", ForgotPasswordPage.class);
     }
 
     @Override
