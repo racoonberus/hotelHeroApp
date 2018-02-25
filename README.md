@@ -1,4 +1,4 @@
-# hotelHeroApp (com.gfb.hotelHero)
+# hotelHeroApp (com.racoonberus.hotelHero)
 
 Generated from archetype
 
