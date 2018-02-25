@@ -9,11 +9,15 @@ import org.apache.wicket.extensions.ajax.markup.html.autocomplete.AutoCompleteTe
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RadioChoice;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class RegistrationTemplatePage extends BasePage {
@@ -24,14 +28,16 @@ public class RegistrationTemplatePage extends BasePage {
     @SpringBean
     private CityService cityService;
 
-    private Person person;
-
     @Override
     protected void onInitialize() {
         super.onInitialize();
 
-        person = new Person();
+        Person person = new Person();
+        person.setBirthday(new Date(1990, 10, 12));
         person.setArrivalDate(new Date());
+
+        final FeedbackPanel feedback = new FeedbackPanel("feedback");
+        add(feedback);
 
         Form form = new Form("form") {
             @Override
@@ -61,7 +67,7 @@ public class RegistrationTemplatePage extends BasePage {
         form.add(nationalityTextField);
 
 
-        form.add(new TextField("birthday"));
+        form.add(new TextField("birthday", new DateTimeStringModel(person, "birthday")));
         form.add(new RadioChoice<>("gender",
                 Model.of(Person.Genders.MALE),
                 Arrays.asList(Person.Genders.values())));
@@ -108,5 +114,43 @@ public class RegistrationTemplatePage extends BasePage {
         form.add(new TextField("migrationCard.number"));
 
         add(form);
+    }
+
+    private static class DateTimeStringModel extends PropertyModel<String> {
+        private String format = "Y-M-d";
+
+        public DateTimeStringModel(Object modelObject, String expression) {
+            super(modelObject, expression);
+        }
+
+        public DateTimeStringModel(Object modelObject, String expression, String format) {
+            super(modelObject, expression);
+            this.format = format;
+        }
+
+        @Override
+        public String getObject() {
+            try {
+                Date dt = (Date) this.getPropertyGetter().invoke(this.getTarget());
+                if (null == dt) {
+                    dt = new Date();
+                }
+                return new SimpleDateFormat(format).format(dt);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            return "";
+        }
+
+        @Override
+        public void setObject(String object) {
+            if (null == object) return;
+            try {
+                Date dt = new SimpleDateFormat(format).parse(object);
+                this.getPropertySetter().invoke(this.getTarget(), dt);
+            } catch (ParseException | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

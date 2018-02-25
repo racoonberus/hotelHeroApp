@@ -34,6 +34,11 @@ public class Application extends AuthenticatedWebApplication {
         mountPage("reg-tpl", ForgotPasswordPage.class);
     }
 
+    public void setSpringComponentInjector(SpringComponentInjector injector)
+    {
+        getComponentInstantiationListeners().add(injector);
+    }
+
     @Override
     protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
         return SimpleAuthenticationSession.class;
