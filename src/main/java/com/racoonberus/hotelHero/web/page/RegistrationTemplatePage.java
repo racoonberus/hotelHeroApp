@@ -3,6 +3,7 @@ package com.racoonberus.hotelHero.web.page;
 import com.racoonberus.hotelHero.domain.Person;
 import com.racoonberus.hotelHero.service.CityService;
 import com.racoonberus.hotelHero.service.CountryService;
+import com.racoonberus.hotelHero.web.form.DateTextField;
 import com.racoonberus.tpl_reg_helper.domain.IdentityDocument;
 import com.racoonberus.tpl_reg_helper.domain.RightToStayConfirmingDocument;
 import org.apache.wicket.extensions.ajax.markup.html.autocomplete.AutoCompleteTextField;
@@ -33,7 +34,7 @@ public class RegistrationTemplatePage extends BasePage {
         super.onInitialize();
 
         Person person = new Person();
-        person.setBirthday(new Date(1990, 10, 12));
+//        person.setBirthday(new Date(1990, 10, 12));
         person.setArrivalDate(new Date());
 
         final FeedbackPanel feedback = new FeedbackPanel("feedback");
@@ -42,8 +43,7 @@ public class RegistrationTemplatePage extends BasePage {
         Form form = new Form("form") {
             @Override
             protected void onSubmit() {
-                // TODO: merge XLS
-                System.out.print("Hello");
+                info("Registration document created succesfully!");
             }
 
             @Override
@@ -52,26 +52,28 @@ public class RegistrationTemplatePage extends BasePage {
             }
         };
 
-        form.setDefaultModel(new CompoundPropertyModel<>(person));
+        CompoundPropertyModel<Person> model = new CompoundPropertyModel<>(person);
+        form.setDefaultModel(model);
 
         form.add(new TextField("lastName"));
         form.add(new TextField("firstName"));
 
-        final AutoCompleteTextField<String> nationalityTextField =
+        /*final AutoCompleteTextField<String> nationalityTextField =
                 new AutoCompleteTextField<String>("nationality") {
                     @Override
                     protected Iterator<String> getChoices(String input) {
                         return countryService.getMatches(input).iterator();
                     }
                 };
-        form.add(nationalityTextField);
+        form.add(nationalityTextField);*/
 
-
-        form.add(new TextField("birthday", new DateTimeStringModel(person, "birthday")));
-        form.add(new RadioChoice<>("gender",
+        form.add(new org.apache.wicket.extensions.markup.html.form.DateTextField(
+                "birthday",
+                "yyyy-MM-dd"));
+        /*form.add(new RadioChoice<>("gender",
                 Model.of(Person.Genders.MALE),
-                Arrays.asList(Person.Genders.values())));
-        final AutoCompleteTextField<String> countyTextField =
+                Arrays.asList(Person.Genders.values())));*/
+        /*final AutoCompleteTextField<String> countyTextField =
                 new AutoCompleteTextField<String>("placeOfBirth.county") {
                     @Override
                     protected Iterator<String> getChoices(String input) {
@@ -86,32 +88,32 @@ public class RegistrationTemplatePage extends BasePage {
                         return cityService.getMatches(input).iterator();
                     }
                 };
-        form.add(cityTextField);
+        form.add(cityTextField);*/
 
-        form.add(new RadioChoice<>("identityDocument.type",
+        /*form.add(new RadioChoice<>("identityDocument.type",
                 Model.of(IdentityDocument.Types.PASSPORT),
                 Arrays.asList(IdentityDocument.Types.values())));
         form.add(new TextField("identityDocument.series"));
         form.add(new TextField("identityDocument.identifier"));
         form.add(new TextField("identityDocument.dateOfIssueDate"));
-        form.add(new TextField("identityDocument.validityTillDate"));
+        form.add(new TextField("identityDocument.validityTillDate"));*/
 
-        form.add(new RadioChoice<>("stayConfirmingDocument.type",
+        /*form.add(new RadioChoice<>("stayConfirmingDocument.type",
                 Model.of(RightToStayConfirmingDocument.Types.NONE),
                 Arrays.asList(RightToStayConfirmingDocument.Types.values())));
         form.add(new TextField("stayConfirmingDocument.series"));
         form.add(new TextField("stayConfirmingDocument.identifier"));
         form.add(new TextField("stayConfirmingDocument.dateOfIssueDate"));
-        form.add(new TextField("stayConfirmingDocument.validityTillDate"));
+        form.add(new TextField("stayConfirmingDocument.validityTillDate"));*/
 
-        form.add(new RadioChoice<>("purpose",
+        /*form.add(new RadioChoice<>("purpose",
                 Model.of(Person.Purposes.ANOTHER),
                 Arrays.asList(Person.Purposes.values())));
         form.add(new TextField("arrivalDate"));
-        form.add(new TextField("durationOfStay"));
+        form.add(new TextField("durationOfStay"));*/
 
-        form.add(new TextField("migrationCard.series"));
-        form.add(new TextField("migrationCard.number"));
+//        form.add(new TextField("migrationCard.series"));
+//        form.add(new TextField("migrationCard.number"));
 
         add(form);
     }
@@ -133,7 +135,7 @@ public class RegistrationTemplatePage extends BasePage {
             try {
                 Date dt = (Date) this.getPropertyGetter().invoke(this.getTarget());
                 if (null == dt) {
-                    dt = new Date();
+                    return "";
                 }
                 return new SimpleDateFormat(format).format(dt);
             } catch (IllegalAccessException | InvocationTargetException e) {
@@ -144,7 +146,7 @@ public class RegistrationTemplatePage extends BasePage {
 
         @Override
         public void setObject(String object) {
-            if (null == object) return;
+            if (null == object || object.isEmpty()) return;
             try {
                 Date dt = new SimpleDateFormat(format).parse(object);
                 this.getPropertySetter().invoke(this.getTarget(), dt);

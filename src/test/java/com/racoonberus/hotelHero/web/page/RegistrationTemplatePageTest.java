@@ -30,35 +30,35 @@ public class RegistrationTemplatePageTest {
 
         formTester.setValue("lastName", "Петров");
         formTester.setValue("firstName", "Иван");
-        formTester.setValue("nationality", "Нидерлайнды");
-        formTester.setValue("birthday", "");
-        formTester.setValue("gender", "");
+        formTester.setValue("nationality", "Нидерланды");
+//        formTester.setValue("birthday", "");
+//        formTester.setValue("gender", "");
 
-        formTester.setValue("placeOfBirth.county", "");
-        formTester.setValue("placeOfBirth.city", "");
+//        formTester.setValue("placeOfBirth.county", "");
+//        formTester.setValue("placeOfBirth.city", "");
 
-        formTester.setValue("identityDocument.type", "");
-        formTester.setValue("identityDocument.series", "");
-        formTester.setValue("identityDocument.identifier", "");
-        formTester.setValue("identityDocument.dateOfIssueDate", "");
-        formTester.setValue("identityDocument.validityTillDate", "");
+//        formTester.setValue("identityDocument.type", "");
+//        formTester.setValue("identityDocument.series", "");
+//        formTester.setValue("identityDocument.identifier", "");
+//        formTester.setValue("identityDocument.dateOfIssueDate", "");
+//        formTester.setValue("identityDocument.validityTillDate", "");
 
-        formTester.setValue("stayConfirmingDocument.type", "");
-        formTester.setValue("stayConfirmingDocument.series", "");
-        formTester.setValue("stayConfirmingDocument.identifier", "");
-        formTester.setValue("stayConfirmingDocument.dateOfIssueDate", "");
-        formTester.setValue("stayConfirmingDocument.validityTillDate", "");
+//        formTester.setValue("stayConfirmingDocument.type", "");
+//        formTester.setValue("stayConfirmingDocument.series", "");
+//        formTester.setValue("stayConfirmingDocument.identifier", "");
+//        formTester.setValue("stayConfirmingDocument.dateOfIssueDate", "");
+//        formTester.setValue("stayConfirmingDocument.validityTillDate", "");
 
-        formTester.setValue("purpose", "");
-        formTester.setValue("arrivalDate", "");
-        formTester.setValue("durationOfStay", "");
+//        formTester.setValue("purpose", "");
+//        formTester.setValue("arrivalDate", "");
+//        formTester.setValue("durationOfStay", "");
 
-        formTester.setValue("migrationCard.series", "");
-        formTester.setValue("migrationCard.number", "");
+        formTester.setValue("migrationCard.series", "4567");
+        formTester.setValue("migrationCard.number", "123456");
 
         formTester.submit();
 
-        tester.assertInfoMessages("The value of 'birthday' is not a valid Date.");
+        tester.assertInfoMessages("Registration document created succesfully!");
 //        tester.assertErrorMessages("The value of 'birthday' is not a valid Date.");
     }
 
