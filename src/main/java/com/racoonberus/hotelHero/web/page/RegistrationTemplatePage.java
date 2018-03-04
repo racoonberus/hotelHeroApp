@@ -1,6 +1,5 @@
 package com.racoonberus.hotelHero.web.page;
 
-import com.racoonberus.hotelHero.Application;
 import com.racoonberus.hotelHero.domain.Person;
 import com.racoonberus.hotelHero.service.CityService;
 import com.racoonberus.hotelHero.service.CountryService;
