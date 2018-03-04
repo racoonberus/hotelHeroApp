@@ -19,15 +19,16 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.util.string.Strings;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class RegistrationTemplatePage extends BasePage {
+
+    //    public static final String DATE_PATTERN = "yyyy-MM-dd";
+    public static final String DATE_PATTERN = "dd.MM.yyyy";
 
     @SpringBean
     private CountryService countryService;
@@ -82,7 +83,7 @@ public class RegistrationTemplatePage extends BasePage {
         form.add(new TextField("lastName"));
         form.add(new TextField("firstName"));
         form.add(new BoostedAutoCompleteTextField("nationality", countryService));
-        form.add(new DateTextField("birthday", "yyyy-MM-dd"));
+        form.add(new DateTextField("birthday", DATE_PATTERN));
         form.add(new EnumRadioChoice("gender", Person.Genders.class));
         form.add(new BoostedAutoCompleteTextField("placeOfBirth.county", countryService));
         form.add(new BoostedAutoCompleteTextField("placeOfBirth.city", cityService));
@@ -90,19 +91,19 @@ public class RegistrationTemplatePage extends BasePage {
         form.add(new EnumRadioChoice("identityDocument.type", IdentityDocument.Types.class));
         form.add(new TextField("identityDocument.series"));
         form.add(new TextField("identityDocument.identifier"));
-        form.add(new DateTextField("identityDocument.dateOfIssueDate", "yyyy-MM-dd"));
-        form.add(new DateTextField("identityDocument.validityTillDate", "yyyy-MM-dd"));
+        form.add(new DateTextField("identityDocument.dateOfIssueDate", DATE_PATTERN));
+        form.add(new DateTextField("identityDocument.validityTillDate", DATE_PATTERN));
 
         form.add(new EnumRadioChoice(
                 "stayConfirmingDocument.type", RightToStayConfirmingDocument.Types.class));
         form.add(new TextField("stayConfirmingDocument.series"));
         form.add(new TextField("stayConfirmingDocument.identifier"));
-        form.add(new DateTextField("stayConfirmingDocument.dateOfIssueDate", "yyyy-MM-dd"));
-        form.add(new DateTextField("stayConfirmingDocument.validityTillDate", "yyyy-MM-dd"));
+        form.add(new DateTextField("stayConfirmingDocument.dateOfIssueDate", DATE_PATTERN));
+        form.add(new DateTextField("stayConfirmingDocument.validityTillDate", DATE_PATTERN));
 
         form.add(new EnumRadioChoice("purpose", Person.Purposes.class));
-        form.add(new DateTextField("arrivalDate", "yyyy-MM-dd"));
-        form.add(new DateTextField("durationOfStay", "yyyy-MM-dd"));
+        form.add(new DateTextField("arrivalDate", DATE_PATTERN));
+        form.add(new DateTextField("durationOfStay", DATE_PATTERN));
 
         form.add(new RequiredTextField<>("migrationCard.series"));
         form.add(new RequiredTextField<>("migrationCard.number"));
@@ -124,7 +125,12 @@ public class RegistrationTemplatePage extends BasePage {
 
         @Override
         protected Iterator<String> getChoices(String s) {
-            return null;
+            if (Strings.isEmpty(s)) {
+                List<String> emptyList = Collections.emptyList();
+                return emptyList.iterator();
+            }
+
+            return service.getMatches(s).iterator();
         }
     }
 
