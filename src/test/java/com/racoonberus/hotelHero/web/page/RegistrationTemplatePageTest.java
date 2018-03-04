@@ -59,7 +59,7 @@ public class RegistrationTemplatePageTest {
         String adDate = f.format(new Date(new Date().getTime() - 2 * 24 * 60 * 1000));
         formTester.setValue("arrivalDate", adDate);
         String dosDate = f.format(new Date(new Date().getTime() + 5 * 24 * 60 * 1000));
-        dosDate = "2018-01-01";
+//        dosDate = "2018-01-01";
         formTester.setValue("durationOfStay", dosDate);
 
         formTester.setValue("migrationCard.series", "4567");
@@ -67,8 +67,8 @@ public class RegistrationTemplatePageTest {
 
         formTester.submit();
 
-//        tester.assertInfoMessages("Registration document created succesfully!");
-        tester.assertErrorMessages("The value of 'birthday' is not a valid Date.");
+        tester.assertInfoMessages("Registration document created succesfully!");
+//        tester.assertErrorMessages("The value of 'birthday' is not a valid Date.");
     }
 
 }

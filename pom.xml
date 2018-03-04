@@ -127,7 +127,6 @@
         </dependency>
 
 
-
         <!-- Data storage -->
         <dependency>
             <groupId>javax.persistence</groupId>
@@ -162,9 +161,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.racoonberus.tplRegHelper</groupId>
+            <groupId>com.racoonberus.hotelHero</groupId>
             <artifactId>tplRegHelper</artifactId>
-            <version>1.0</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
