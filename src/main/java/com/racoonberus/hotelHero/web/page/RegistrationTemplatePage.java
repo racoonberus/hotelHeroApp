@@ -3,23 +3,24 @@ package com.racoonberus.hotelHero.web.page;
 import com.racoonberus.hotelHero.domain.Person;
 import com.racoonberus.hotelHero.service.CityService;
 import com.racoonberus.hotelHero.service.CountryService;
-import com.racoonberus.hotelHero.web.form.DateTextField;
 import com.racoonberus.tpl_reg_helper.domain.IdentityDocument;
 import com.racoonberus.tpl_reg_helper.domain.RightToStayConfirmingDocument;
 import org.apache.wicket.extensions.ajax.markup.html.autocomplete.AutoCompleteTextField;
+import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RadioChoice;
+import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
-import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 public class RegistrationTemplatePage extends BasePage {
 
@@ -34,7 +35,6 @@ public class RegistrationTemplatePage extends BasePage {
         super.onInitialize();
 
         Person person = new Person();
-//        person.setBirthday(new Date(1990, 10, 12));
         person.setArrivalDate(new Date());
 
         final FeedbackPanel feedback = new FeedbackPanel("feedback");
@@ -57,102 +57,60 @@ public class RegistrationTemplatePage extends BasePage {
 
         form.add(new TextField("lastName"));
         form.add(new TextField("firstName"));
+        form.add(new BoostedAutoCompleteTextField("nationality", countryService));
+        form.add(new DateTextField("birthday", "yyyy-MM-dd"));
+        form.add(new EnumRadioChoice("gender", Person.Genders.class));
+        form.add(new BoostedAutoCompleteTextField("placeOfBirth.county", countryService));
+        form.add(new BoostedAutoCompleteTextField("placeOfBirth.city", cityService));
 
-        /*final AutoCompleteTextField<String> nationalityTextField =
-                new AutoCompleteTextField<String>("nationality") {
-                    @Override
-                    protected Iterator<String> getChoices(String input) {
-                        return countryService.getMatches(input).iterator();
-                    }
-                };
-        form.add(nationalityTextField);*/
-
-        form.add(new org.apache.wicket.extensions.markup.html.form.DateTextField(
-                "birthday",
-                "yyyy-MM-dd"));
-        /*form.add(new RadioChoice<>("gender",
-                Model.of(Person.Genders.MALE),
-                Arrays.asList(Person.Genders.values())));*/
-        /*final AutoCompleteTextField<String> countyTextField =
-                new AutoCompleteTextField<String>("placeOfBirth.county") {
-                    @Override
-                    protected Iterator<String> getChoices(String input) {
-                        return countryService.getMatches(input).iterator();
-                    }
-                };
-        form.add(countyTextField);
-        final AutoCompleteTextField<String> cityTextField =
-                new AutoCompleteTextField<String>("placeOfBirth.city") {
-                    @Override
-                    protected Iterator<String> getChoices(String input) {
-                        return cityService.getMatches(input).iterator();
-                    }
-                };
-        form.add(cityTextField);*/
-
-        /*form.add(new RadioChoice<>("identityDocument.type",
-                Model.of(IdentityDocument.Types.PASSPORT),
-                Arrays.asList(IdentityDocument.Types.values())));
+        form.add(new EnumRadioChoice("identityDocument.type", IdentityDocument.Types.class));
         form.add(new TextField("identityDocument.series"));
         form.add(new TextField("identityDocument.identifier"));
-        form.add(new TextField("identityDocument.dateOfIssueDate"));
-        form.add(new TextField("identityDocument.validityTillDate"));*/
+        form.add(new DateTextField("identityDocument.dateOfIssueDate", "yyyy-MM-dd"));
+        form.add(new DateTextField("identityDocument.validityTillDate", "yyyy-MM-dd"));
 
-        /*form.add(new RadioChoice<>("stayConfirmingDocument.type",
-                Model.of(RightToStayConfirmingDocument.Types.NONE),
-                Arrays.asList(RightToStayConfirmingDocument.Types.values())));
+        form.add(new EnumRadioChoice(
+                "stayConfirmingDocument.type", RightToStayConfirmingDocument.Types.class));
         form.add(new TextField("stayConfirmingDocument.series"));
         form.add(new TextField("stayConfirmingDocument.identifier"));
-        form.add(new TextField("stayConfirmingDocument.dateOfIssueDate"));
-        form.add(new TextField("stayConfirmingDocument.validityTillDate"));*/
+        form.add(new DateTextField("stayConfirmingDocument.dateOfIssueDate", "yyyy-MM-dd"));
+        form.add(new DateTextField("stayConfirmingDocument.validityTillDate", "yyyy-MM-dd"));
 
-        /*form.add(new RadioChoice<>("purpose",
-                Model.of(Person.Purposes.ANOTHER),
-                Arrays.asList(Person.Purposes.values())));
-        form.add(new TextField("arrivalDate"));
-        form.add(new TextField("durationOfStay"));*/
+        form.add(new EnumRadioChoice("purpose", Person.Purposes.class));
+        form.add(new DateTextField("arrivalDate", "yyyy-MM-dd"));
+        form.add(new DateTextField("durationOfStay", "yyyy-MM-dd"));
 
-//        form.add(new TextField("migrationCard.series"));
-//        form.add(new TextField("migrationCard.number"));
+        form.add(new RequiredTextField<>("migrationCard.series"));
+        form.add(new RequiredTextField<>("migrationCard.number"));
 
         add(form);
     }
 
-    private static class DateTimeStringModel extends PropertyModel<String> {
-        private String format = "Y-M-d";
+    public interface TextSearchService {
+        List<String> getMatches(String query);
+    }
 
-        public DateTimeStringModel(Object modelObject, String expression) {
-            super(modelObject, expression);
-        }
+    private static class BoostedAutoCompleteTextField extends AutoCompleteTextField<String> {
+        private TextSearchService service;
 
-        public DateTimeStringModel(Object modelObject, String expression, String format) {
-            super(modelObject, expression);
-            this.format = format;
-        }
-
-        @Override
-        public String getObject() {
-            try {
-                Date dt = (Date) this.getPropertyGetter().invoke(this.getTarget());
-                if (null == dt) {
-                    return "";
-                }
-                return new SimpleDateFormat(format).format(dt);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-            return "";
+        public BoostedAutoCompleteTextField(String id, TextSearchService service) {
+            super(id);
+            this.service = service;
         }
 
         @Override
-        public void setObject(String object) {
-            if (null == object || object.isEmpty()) return;
-            try {
-                Date dt = new SimpleDateFormat(format).parse(object);
-                this.getPropertySetter().invoke(this.getTarget(), dt);
-            } catch (ParseException | IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
+        protected Iterator<String> getChoices(String s) {
+            return null;
+        }
+    }
+
+    private static class EnumRadioChoice extends RadioChoice {
+        public EnumRadioChoice(String id, Class<? extends Enum> e) {
+            super(id, Model.of(e.getEnumConstants()[0]), Arrays.asList(e.getEnumConstants()));
+        }
+
+        public EnumRadioChoice(String id, IModel model, List choices) {
+            super(id, model, choices);
         }
     }
 }

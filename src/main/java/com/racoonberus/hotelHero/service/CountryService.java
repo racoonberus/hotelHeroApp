@@ -1,5 +1,6 @@
 package com.racoonberus.hotelHero.service;
 
+import com.racoonberus.hotelHero.web.page.RegistrationTemplatePage;
 import org.apache.wicket.util.string.Strings;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Service
-public class CountryService {
+public class CountryService implements RegistrationTemplatePage.TextSearchService {
 
     public List<String> getMatches(String pattern) {
 
