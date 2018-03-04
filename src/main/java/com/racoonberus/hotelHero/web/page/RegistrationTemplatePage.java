@@ -1,10 +1,14 @@
 package com.racoonberus.hotelHero.web.page;
 
+import com.racoonberus.hotelHero.Application;
 import com.racoonberus.hotelHero.domain.Person;
 import com.racoonberus.hotelHero.service.CityService;
 import com.racoonberus.hotelHero.service.CountryService;
-import com.racoonberus.tpl_reg_helper.domain.IdentityDocument;
-import com.racoonberus.tpl_reg_helper.domain.RightToStayConfirmingDocument;
+import com.racoonberus.tplRegHelper.XlsDecorator;
+import com.racoonberus.tplRegHelper.domain.IdentityDocument;
+import com.racoonberus.tplRegHelper.domain.RightToStayConfirmingDocument;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.wicket.extensions.ajax.markup.html.autocomplete.AutoCompleteTextField;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.form.Form;
@@ -17,6 +21,8 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
+import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
@@ -34,16 +40,35 @@ public class RegistrationTemplatePage extends BasePage {
     protected void onInitialize() {
         super.onInitialize();
 
+        final FeedbackPanel feedback = new FeedbackPanel("feedback");
+        add(feedback);
+
+        File proto = new File(RegistrationTemplatePage.class.getResource("/blank.xlsx").getFile());
+        if (!proto.exists()) error("ZHOPA!");
+
         Person person = new Person();
         person.setArrivalDate(new Date());
 
-        final FeedbackPanel feedback = new FeedbackPanel("feedback");
-        add(feedback);
 
         Form form = new Form("form") {
             @Override
             protected void onSubmit() {
-                info("Registration document created succesfully!");
+                try {
+                    String outDir = System.getProperty("user.home") + "/tpl-reg-helper";
+                    String fn = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date())
+                            + "-"
+                            + person.getFullName();
+                    File outFile = getBlankCopy(proto, outDir, fn);
+                    Workbook book = new XSSFWorkbook(new FileInputStream(outFile));
+                    new XlsDecorator(book).write(person);
+                    book.write(new FileOutputStream(outFile));
+                    book.close();
+                    info("Registration document created succesfully!");
+                    info("See: " + outFile.getAbsolutePath());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    error(e.getMessage());
+                }
             }
 
             @Override
@@ -112,5 +137,23 @@ public class RegistrationTemplatePage extends BasePage {
         public EnumRadioChoice(String id, IModel model, List choices) {
             super(id, model, choices);
         }
+    }
+
+    private static File getBlankCopy(File proto, String distDir, String docFileName) throws IOException {
+        File bfile = new File(distDir + "/" + docFileName + ".xlsx");
+
+        InputStream inStream = new FileInputStream(proto);
+        OutputStream outStream = new FileOutputStream(bfile);
+
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = inStream.read(buffer)) > 0) {
+            outStream.write(buffer, 0, length);
+        }
+
+        inStream.close();
+        outStream.close();
+
+        return bfile;
     }
 }
